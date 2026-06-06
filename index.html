@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MoodScape Pro - K-Pop Edition</title>
+    <title>MoodScape Neon - Heavy Meteor Shower</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght=300;400;600;700&display=swap" rel="stylesheet">
     <style>
         *{
@@ -18,101 +18,233 @@
             display:flex;
             justify-content:center;
             align-items:center;
-            padding:20px;
+            padding:10px;
             color:white;
-            transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+            overflow-x: hidden;
+            position: relative;
+            background-size: 400% 400% !important;
+            animation: gradientAnimation 20s ease infinite !important;
+            transition: all 1s ease;
         }
 
-        /* Smooth Mood Backgrounds */
-        body.focused { background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d); }
-        body.chill { background: linear-gradient(135deg, #00b4db, #0083b0); }
-        body.hype { background: linear-gradient(135deg, #f80759, #bc4e9c); }
-        body.sad { background: linear-gradient(135deg, #304352, #d7d2cc); }
+        /* 🪐 NEON GRADIENTS */
+        body.focused { background: linear-gradient(-45deg, #0f172a, #1e1b4b, #311042, #0f172a); --neon: #a855f7; }
+        body.chill { background: linear-gradient(-45deg, #062026, #004b57, #00707c, #062026); --neon: #06b6d4; }
+        body.hype { background: linear-gradient(-45deg, #2e0817, #65052b, #9d174d, #2e0817); --neon: #f43f5e; }
+        body.sad { background: linear-gradient(-45deg, #111827, #1f2937, #374151, #111827); --neon: #9ca3af; }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* 🌌 SPACE BACKGROUND CONTAINER */
+        .space-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            overflow: hidden;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* ✨ BACKGROUND STARS */
+        .star {
+            position: absolute;
+            background: #ffffff;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #ffffff, 0 0 15px var(--neon);
+            animation: twinkleStar 4s infinite ease-in-out;
+            opacity: 0.2;
+        }
+        @keyframes twinkleStar {
+            0%, 100% { opacity: 0.2; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 12px #ffffff, 0 0 20px var(--neon); }
+        }
+        
+        /* 🌠 PARALLEL SHOOTING STAR */
+        .shooting-star {
+            position: absolute;
+            width: 2px; 
+            height: 160px; /* పొడవైన షార్ప్ కాంతి రేఖ */
+            background: linear-gradient(to top, transparent, rgba(255, 255, 255, 0.3), #ffffff);
+            opacity: 0;
+            animation: shootParallel 1.4s forwards linear; 
+        }
+
+        /* 🌟 బ్రైట్ స్పార్క్ హెడ్ */
+        .shooting-star::before {
+            content: '';
+            position: absolute;
+            top: 0; 
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background: #ffffff;
+            border-radius: 50%;
+            box-shadow: 0 0 12px #ffffff, 0 0 25px var(--neon), 0 0 45px #ffffff;
+        }
+
+        /* 🚀 సమాంతరంగా దూсуకెళ్లే యానిమేషన్ */
+        @keyframes shootParallel {
+            0% {
+                transform: translateY(-20vh) translateX(0) rotate(-135deg);
+                opacity: 0;
+            }
+            15% {
+                opacity: 1; 
+            }
+            85% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(110vh) translateX(-110vh) rotate(-135deg);
+                opacity: 0; 
+            }
+        }
 
         .container{
             width:100%;
-            max-width:900px;
+            max-width:800px;
             text-align:center;
+            z-index: 2;
+            padding: 10px;
         }
 
         h1{
-            font-size:3rem;
-            margin-bottom:10px;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            font-size: calc(1.8rem + 1.5vw); 
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-shadow: 0 0 20px var(--neon);
+            transition: all 0.5s ease;
         }
 
         .subtitle{
             margin-bottom:20px;
-            opacity:0.9;
+            opacity:0.8;
             font-weight: 300;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: calc(0.7rem + 0.2vw);
         }
 
         #clock{
-            font-size:1.4rem;
+            font-size: calc(0.9rem + 0.3vw);
             font-weight:600;
             margin-bottom:25px;
-            background: rgba(0,0,0,0.2);
+            background: rgba(255,255,255,0.05);
             display: inline-block;
-            padding: 5px 20px;
+            padding: 6px 20px;
             border-radius: 50px;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
         .mood-grid{
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-            gap:15px;
-            margin-bottom:25px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 25px;
         }
 
         .mood-btn{
-            background:rgba(255,255,255,0.15);
-            backdrop-filter:blur(12px);
-            padding:15px;
-            border-radius:15px;
-            cursor:pointer;
-            transition:0.3s;
-            font-weight:600;
-            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            padding: 14px;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: calc(0.85rem + 0.2vw);
+            border: 1px solid rgba(255,255,255,0.08);
+            -webkit-tap-highlight-color: transparent;
         }
 
         .mood-btn:hover{
-            transform:translateY(-5px);
-            background:rgba(255,255,255,0.3);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--neon);
+            box-shadow: 0 0 15px var(--neon);
         }
 
-        .player-card{
-            background:rgba(255,255,255,0.12);
-            backdrop-filter:blur(15px);
-            border-radius:20px;
-            padding:20px;
-            margin-bottom:20px;
-            border: 1px solid rgba(255,255,255,0.1);
+        .player-card, .quote-box{
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(25px);
+            border-radius: 20px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            width: 100%;
+        }
+
+        .quote-box {
+            text-align: left;
+            border-left: 5px solid var(--neon);
+            transition: border 0.5s ease;
+            padding: 20px;
+        }
+
+        .quote-box h2 {
+            font-size: calc(1.1rem + 0.3vw);
+            margin-bottom: 6px;
+            color: var(--neon);
+            transition: color 0.5s ease;
+        }
+
+        .quote-box p {
+            font-size: calc(0.85rem + 0.1vw);
+            opacity: 0.9;
+        }
+
+        #quote {
+            font-style: italic;
+            opacity: 0.95;
+            margin-top: 10px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 10px;
+            font-size: calc(0.9rem + 0.1vw);
+            line-height: 1.5;
+        }
+
+        .spotify-wrapper {
+            position: relative;
+            width: 100%;
+            height: 380px;
         }
 
         iframe {
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            width: 100%;
+            height: 100%;
+            border-radius: 14px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
         }
 
         footer{
-            margin-top:20px;
-            opacity:0.8;
-            font-size:0.9rem;
+            margin-top: 25px;
+            opacity: 0.5;
+            font-size: 0.75rem;
+        }
+        
+        @media(min-width: 600px) {
+            .mood-grid { grid-template-columns: repeat(4, 1fr); }
+            .player-card, .quote-box { padding: 25px; }
         }
 
-        @media(max-width:768px){
-            h1{ font-size:2rem; }
-            iframe{ height:352px; }
+        @media(max-width: 480px) {
+            .spotify-wrapper { height: 352px; }
+            body { padding: 5px; }
         }
     </style>
 </head>
 <body class="focused">
 
+<div class="space-bg" id="space-container"></div>
+
 <div class="container">
     <h1 id="title">Focused Mode 🎯</h1>
-    <p class="subtitle">🎵 MoodScape Pro — K-Pop Edition</p>
+    <p class="subtitle">✨ NextGen MoodScape — Realistic Meteor Shower</p>
     
     <div id="clock"></div>
 
@@ -124,51 +256,123 @@
     </div>
 
     <div class="player-card">
-        <!-- Default start with BTS -->
-        <iframe
-            id="clean-player"
-            src="https://open.spotify.com/embed/artist/1SIocsqdEefUTE6XKGUiVS?utm_source=generator"
-            width="100%"
-            height="352"
-            frameborder="0"
-            allowfullscreen
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            loading="lazy">
-        </iframe>
+        <div class="spotify-wrapper">
+            <iframe
+                id="cyber-player"
+                src="https://open.spotify.com/embed/artist/1SIocsqdEefUTE6XKGUiVS?utm_source=generator"
+                frameborder="0"
+                allowfullscreen
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy">
+            </iframe>
+        </div>
+    </div>
+
+    <div class="quote-box">
+        <h2 id="mood-label">Current Mood: Focused</h2>
+        <p id="description">Stay productive and eliminate distractions.</p>
+        <p id="quote">"Small progress every day adds up to big results. Stay locked in and focus on your goals."</p>
     </div>
 
     <footer>
-        ✨ MoodScape Pro | Custom K-Pop Player
+        🛸 MOODSCAPE NEON // CONTINUOUS METEOR SHOWER
     </footer>
 </div>
 
 <script>
-    // కేవలం లింకులు మాత్రమే ఉంటాయి, ఎర్రర్ వచ్చే టెక్స్ట్‌లు అన్నీ క్లీన్ చేసేశా!
     const moods = {
         focused: {
             title: "Focused Mode 🎯",
-            playlist: "https://open.spotify.com/embed/artist/1SIocsqdEefUTE6XKGUiVS?utm_source=generator" // BTS
+            moodLabel: "Current Mood: Focused",
+            description: "Stay productive and eliminate distractions.",
+            quote: '"Small progress every day adds up to big results. Stay locked in and focus on your goals."',
+            playlist: "https://open.spotify.com/embed/artist/1SIocsqdEefUTE6XKGUiVS?utm_source=generator"
         },
         chill: {
             title: "Chill Mode 🌊",
-            playlist: "https://open.spotify.com/embed/artist/41MozSoPIsD1dJM0CLPjZF?utm_source=generator" // Blackpink
+            moodLabel: "Current Mood: Chill",
+            description: "Take a deep breath and clear my mind.",
+            quote: '"Disconnect for a moment. Let the calm wash over you and enjoy the present vibe."',
+            playlist: "https://open.spotify.com/embed/artist/41MozSoPIsD1dJM0CLPjZF?utm_source=generator"
         },
         hype: {
             title: "Hype Mode 🔥",
-            playlist: "https://open.spotify.com/embed/artist/3Nrfpe0tUJi4K4DXYWgMUX?utm_source=generator" // BabyMonster
+            moodLabel: "Current Mood: Hype",
+            description: "Unleash your energy and crush it.",
+            quote: '"Turn up the energy, break the limits, and show the world what you are capable of doing!"',
+            playlist: "https://open.spotify.com/embed/artist/3Nrfpe0tUJi4K4DXYWgMUX?utm_source=generator"
         },
         sad: {
             title: "Sad Mode 🌧️",
-            playlist: "https://open.spotify.com/embed/playlist/4gyertnXGs2sSeUWOAKUP2?utm_source=generator" // Telugu Sad Playlist
+            moodLabel: "Current Mood: Sad",
+            description: "It is okay to not be okay sometimes.",
+            quote: '"Every storm eventually runs out of rain. Take your time, heal, and breathe. Better days are ahead."',
+            playlist: "https://open.spotify.com/embed/playlist/4gyertnXGs2sSeUWOAKUP2?utm_source=generator"
         }
     };
 
     function changeMood(mood){
         document.body.className = mood;
         document.getElementById("title").innerText = moods[mood].title;
+        document.getElementById("mood-label").innerText = moods[mood].moodLabel;
+        document.getElementById("description").innerText = moods[mood].description;
+        document.getElementById("quote").innerText = moods[mood].quote;
         
-        // పక్కాగా ప్లేయర్ లింక్ మారిపోతుంది
-        document.getElementById("clean-player").src = moods[mood].playlist;
+        document.getElementById("cyber-player").src = moods[mood].playlist;
+    }
+
+    function initCosmos() {
+        const container = document.getElementById('space-container');
+        
+        // 1. స్థిరంగా ఉండే చిన్న నక్షత్రాలు
+        const starCount = 55; 
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('span');
+            star.classList.add('star');
+            
+            const size = Math.random() * 2.5 + 1;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.left = `${Math.random() * 100}vw`;
+            star.style.top = `${Math.random() * 100}vh`;
+            star.style.animationDelay = `${Math.random() * 4}s`;
+            
+            container.appendChild(star);
+        }
+
+        // 2. 🎬 ఒక సింగిల్ తోకచుక్కని క్రియేట్ చేసే ఫంక్షన్
+        function createShootingStar() {
+            const shootingStar = document.createElement('span');
+            shootingStar.classList.add('shooting-star');
+            
+            // స్క్రీన్ పైన ఎక్కడైనా రాండమ్‌గా స్టార్ట్ అవుతాయి
+            shootingStar.style.left = `${Math.random() * 130 - 20}vw`; 
+            shootingStar.style.top = `${Math.random() * -15}vh`; 
+            
+            // ఇమేజ్ లాగే కొన్ని చిన్నవి, కొన్ని పెద్దవి ఉండటానికి సైజ్ వేరియేషన్
+            const scale = Math.random() * 0.6 + 0.4;
+            shootingStar.style.transform = `scale(${scale})`;
+            
+            // ప్రతి తోకచుక్క స్పీడ్ కూడా కొద్దిగా వేరవ్వడానికి రాండమ్ యానిమేషన్ డ్యూరేషన్ (1s నుండి 1.6s)
+            const duration = Math.random() * 0.6 + 1.0;
+            shootingStar.style.animationDuration = `${duration}s`;
+            
+            container.appendChild(shootingStar);
+            
+            // యానిమేషన్ అయిపోగానే స్క్రీన్ నుండి డిలీట్ అవుతుంది
+            setTimeout(() => {
+                shootingStar.remove();
+            }, duration * 1000);
+        }
+
+        // 🔥 మ్యాజిక్ లూప్: ప్రతి 600 మిల్లీసెకన్లకి (0.6s) ఒక కొత్త స్టార్ పుడుతూనే ఉంటుంది!
+        // దీనివల్ల స్క్రీన్ పైన ఎప్పుడూ 3 నుండి 5 తోకచుక్కలు కంటిన్యూస్‌గా కనిపిస్తూనే ఉంటాయి.
+        setInterval(createShootingStar, 600);
+
+        // స్టార్టింగ్ లోనే ఒకేసారి 3 నక్షత్రాలు పడేలా ఇనిషియల్ గా రన్ చేస్తున్నాం
+        for(let i=0; i<3; i++) {
+            setTimeout(createShootingStar, i * 300);
+        }
     }
 
     function updateClock(){
@@ -178,6 +382,7 @@
 
     setInterval(updateClock, 1000);
     updateClock();
+    initCosmos();
 </script>
 
 </body>
