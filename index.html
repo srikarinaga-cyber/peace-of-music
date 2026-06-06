@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MoodScape Pro - K-Pop Edition</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght=300;400;600;700&display=swap" rel="stylesheet">
     <style>
         *{
             margin:0;
@@ -82,7 +82,7 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
 
-        .player-card, .quote-box{
+        .player-card{
             background:rgba(255,255,255,0.12);
             backdrop-filter:blur(15px);
             border-radius:20px;
@@ -116,7 +116,6 @@
     
     <div id="clock"></div>
 
-    <!-- Clean Buttons without extra text -->
     <div class="mood-grid">
         <div class="mood-btn" onclick="changeMood('focused')">🎯 Focused</div>
         <div class="mood-btn" onclick="changeMood('chill')">🌊 Chill</div>
@@ -125,9 +124,9 @@
     </div>
 
     <div class="player-card">
-        <!-- Default UI: Loads BTS for Focused Mode -->
+        <!-- Default start with BTS -->
         <iframe
-            id="playlist"
+            id="clean-player"
             src="https://open.spotify.com/embed/artist/1SIocsqdEefUTE6XKGUiVS?utm_source=generator"
             width="100%"
             height="352"
@@ -138,62 +137,38 @@
         </iframe>
     </div>
 
-    <div class="quote-box">
-        <h2 id="mood-label">Current Mood: Focused</h2>
-        <p id="description">Stay productive and focused with BTS.</p>
-        <p id="quote">"Small progress is still progress. - BTS"</p>
-    </div>
-
     <footer>
         ✨ MoodScape Pro | Custom K-Pop Player
     </footer>
 </div>
 
 <script>
-    // All 4 modes fully rectified and working flawlessly
+    // కేవలం లింకులు మాత్రమే ఉంటాయి, ఎర్రర్ వచ్చే టెక్స్ట్‌లు అన్నీ క్లీన్ చేసేశా!
     const moods = {
         focused: {
             title: "Focused Mode 🎯",
-            moodLabel: "Current Mood: Focused",
-            description: "Stay productive and focused with BTS.",
-            quote: "Small progress is still progress. - BTS",
-            playlist: "https://open.spotify.com/embed/artist/1SIocsqdEefUTE6XKGUiVS?utm_source=generator" // Fixed BTS Artist Profile
+            playlist: "https://open.spotify.com/embed/artist/1SIocsqdEefUTE6XKGUiVS?utm_source=generator" // BTS
         },
         chill: {
             title: "Chill Mode 🌊",
-            moodLabel: "Current Mood: Chill",
-            description: "Relax and enjoy Blackpink vibes.",
-            quote: "Stay with me, let's melt the cold day away. - Blackpink",
             playlist: "https://open.spotify.com/embed/artist/41MozSoPIsD1dJM0CLPjZF?utm_source=generator" // Blackpink
         },
         hype: {
             title: "Hype Mode 🔥",
-            moodLabel: "Current Mood: Hype",
-            description: "High energy music for motivation with BabyMonster.",
-            quote: "Batter, batter, batter up! - BabyMonster",
-            playlist: "https://open.spotify.com/embed/artist/1t0o79b76p8rLYfwtX7766?utm_source=generator" // 100% Working BabyMonster Profile
+            playlist: "https://open.spotify.com/embed/artist/3Nrfpe0tUJi4K4DXYWgMUX?utm_source=generator" // BabyMonster
         },
         sad: {
             title: "Sad Mode 🌧️",
-            moodLabel: "Current Mood: Sad",
-            description: "Comfort songs for emotional moments.",
-            quote: "Every storm eventually passes.",
-            playlist: "https://open.spotify.com/embed/playlist/4gyertnXGs2sSeUWOAKUP2?utm_source=generator" // Your Telugu Sad Playlist
+            playlist: "https://open.spotify.com/embed/playlist/4gyertnXGs2sSeUWOAKUP2?utm_source=generator" // Telugu Sad Playlist
         }
     };
 
     function changeMood(mood){
         document.body.className = mood;
         document.getElementById("title").innerText = moods[mood].title;
-        document.getElementById("mood-label").innerText = moods[mood].moodLabel;
-        document.getElementById("description").innerText = moods[mood].description;
-        document.getElementById("quote").innerText = moods[mood].quote;
-        const iframe = document.getElementById("playlist");
-        // Force a short unload+reload to ensure Spotify embed updates reliably across artists/playlists
-        iframe.src = '';
-        setTimeout(() => {
-            iframe.src = moods[mood].playlist;
-        }, 120);
+        
+        // పక్కాగా ప్లేయర్ లింక్ మారిపోతుంది
+        document.getElementById("clean-player").src = moods[mood].playlist;
     }
 
     function updateClock(){
